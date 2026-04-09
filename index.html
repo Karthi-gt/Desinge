@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ANTIGRAVITY ARCHITECT — AI-Powered Architectural Intelligence</title>
+  <meta name="description" content="Design next-generation buildings in zero-gravity space with AI-powered architectural intelligence. Site analysis, generative design, sustainability metrics and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════
+     PARTICLE CANVAS
+════════════════════════════════════════════════════ -->
+<canvas id="particleCanvas"></canvas>
+
+<!-- ═══════════════════════════════════════════════════
+     CURSOR GLOW
+════════════════════════════════════════════════════ -->
+<div id="cursorGlow"></div>
+<div id="cursorDot"></div>
+
+<!-- ═══════════════════════════════════════════════════
+     HOLOGRAPHIC GRID OVERLAY
+════════════════════════════════════════════════════ -->
+<div class="holo-grid"></div>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER / NAV
+════════════════════════════════════════════════════ -->
+<header id="mainHeader">
+  <div class="header-inner">
+    <div class="logo-block">
+      <div class="logo-icon">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="20,2 38,32 2,32" fill="none" stroke="url(#logoGrad)" stroke-width="2"/>
+          <polygon points="20,10 32,30 8,30" fill="url(#logoFill)" opacity="0.3"/>
+          <circle cx="20" cy="20" r="4" fill="url(#logoGrad)"/>
+          <defs>
+            <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40">
+              <stop offset="0%" stop-color="#00f5ff"/>
+              <stop offset="100%" stop-color="#bf00ff"/>
+            </linearGradient>
+            <linearGradient id="logoFill" x1="0" y1="0" x2="40" y2="40">
+              <stop offset="0%" stop-color="#00f5ff"/>
+              <stop offset="100%" stop-color="#bf00ff"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-main">ANTIGRAVITY</span>
+        <span class="logo-sub">ARCHITECT</span>
+      </div>
+    </div>
+
+    <nav class="main-nav">
+      <a href="#" class="nav-link active" data-section="site">Site Analysis</a>
+      <a href="#" class="nav-link" data-section="generate">AI Generate</a>
+      <a href="#" class="nav-link" data-section="design">Design View</a>
+      <a href="#" class="nav-link" data-section="sustain">Sustainability</a>
+      <a href="#" class="nav-link" data-section="insights">Insights</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="btn-ar" id="arToggle">
+        <span class="btn-icon">⬡</span> AR/VR MODE
+      </button>
+      <div class="status-indicator">
+        <span class="status-dot"></span>
+        <span class="status-text">AI ONLINE</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════
+     MAIN WORKSPACE
+════════════════════════════════════════════════════ -->
+<main id="workspace">
+
+  <!-- ═══════════════════════════════════════
+       SECTION 1: SITE ANALYSIS
+  ═══════════════════════════════════════ -->
+  <section class="workspace-section active" id="section-site">
+    <div class="section-header">
+      <div class="section-tag">MODULE 01</div>
+      <h1 class="section-title">Site Analysis <span class="title-accent">Intelligence</span></h1>
+      <p class="section-desc">Real-time terrain analysis with environmental overlay systems</p>
+    </div>
+
+    <div class="site-layout">
+      <!-- Globe / Terrain Map -->
+      <div class="glass-panel terrain-panel float-panel">
+        <div class="panel-header">
+          <span class="panel-title">3D Terrain Map</span>
+          <div class="panel-controls">
+            <button class="ctrl-btn active" data-overlay="sun">☀ Solar</button>
+            <button class="ctrl-btn" data-overlay="wind">⟴ Wind</button>
+            <button class="ctrl-btn" data-overlay="noise">◎ Noise</button>
+            <button class="ctrl-btn" data-overlay="zone">⬡ Zoning</button>
+          </div>
+        </div>
+        <div class="terrain-viewport" id="terrainViewport">
+          <canvas id="terrainCanvas"></canvas>
+          <div class="terrain-overlay" id="terrainOverlay"></div>
+          <div class="terrain-label">LAT 40.712° N | LON 74.006° W | ALT 10m</div>
+          <div class="terrain-compass">
+            <div class="compass-ring">N</div>
+          </div>
+          <div class="overlay-legend" id="overlayLegend">
+            <div class="legend-title">SOLAR INTENSITY</div>
+            <div class="legend-scale">
+              <div class="legend-bar"></div>
+              <div class="legend-labels"><span>Low</span><span>High</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Site Info Cards -->
+      <div class="site-info-column">
+        <div class="glass-panel info-card float-panel" style="--float-delay: 0.2s">
+          <div class="info-card-icon">📡</div>
+          <div class="info-card-content">
+            <div class="info-card-label">Site Coordinates</div>
+            <div class="info-card-value">40.7128° N, 74.0060° W</div>
+            <div class="info-card-sub">New York, USA · Urban Zone A-3</div>
+          </div>
+        </div>
+
+        <div class="glass-panel info-card float-panel" style="--float-delay: 0.4s">
+          <div class="info-card-icon">🌡</div>
+          <div class="info-card-content">
+            <div class="info-card-label">Climate Analysis</div>
+            <div class="info-card-value">Humid Subtropical</div>
+            <div class="info-card-sub">Avg. 13.4°C · Humidity 63%</div>
+          </div>
+        </div>
+
+        <div class="glass-panel info-card float-panel" style="--float-delay: 0.6s">
+          <div class="info-card-icon">💨</div>
+          <div class="info-card-content">
+            <div class="info-card-label">Wind Pattern</div>
+            <div class="wind-bars">
+              <div class="wind-bar" style="--h:60%"><span>N</span></div>
+              <div class="wind-bar" style="--h:85%"><span>NE</span></div>
+              <div class="wind-bar" style="--h:40%"><span>E</span></div>
+              <div class="wind-bar" style="--h:70%"><span>SE</span></div>
+              <div class="wind-bar" style="--h:55%"><span>S</span></div>
+              <div class="wind-bar" style="--h:90%"><span>SW</span></div>
+              <div class="wind-bar" style="--h:45%"><span>W</span></div>
+              <div class="wind-bar" style="--h:65%"><span>NW</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-panel info-card float-panel" style="--float-delay: 0.8s">
+          <div class="info-card-icon">🌍</div>
+          <div class="info-card-content">
+            <div class="info-card-label">Seismic Risk</div>
+            <div class="seismic-scale">
+              <div class="seismic-fill" style="--w: 25%"></div>
+            </div>
+            <div class="info-card-sub">Zone II — Moderate · Active faults: 3</div>
+          </div>
+        </div>
+
+        <div class="glass-panel analysis-score float-panel" style="--float-delay: 1s">
+          <div class="score-title">SITE SUITABILITY SCORE</div>
+          <div class="score-ring-container">
+            <svg class="score-ring" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(0,245,255,0.1)" stroke-width="8"/>
+              <circle cx="60" cy="60" r="50" fill="none" stroke="url(#scoreGrad)" stroke-width="8"
+                stroke-dasharray="314" stroke-dashoffset="60" stroke-linecap="round"
+                class="score-arc" transform="rotate(-90 60 60)"/>
+              <defs>
+                <linearGradient id="scoreGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#00f5ff"/>
+                  <stop offset="100%" stop-color="#bf00ff"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div class="score-value">81<span>%</span></div>
+          </div>
+          <div class="score-breakdown">
+            <div class="score-item"><span>Solar Access</span><span class="s-val good">92%</span></div>
+            <div class="score-item"><span>Wind Exposure</span><span class="s-val warn">68%</span></div>
+            <div class="score-item"><span>Connectivity</span><span class="s-val good">95%</span></div>
+            <div class="score-item"><span>Flood Risk</span><span class="s-val good">88%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SECTION 2: AI DESIGN GENERATOR
+  ═══════════════════════════════════════ -->
+  <section class="workspace-section" id="section-generate">
+    <div class="section-header">
+      <div class="section-tag">MODULE 02</div>
+      <h2 class="section-title">AI Design <span class="title-accent">Generator</span></h2>
+      <p class="section-desc">Describe your vision — the AI assembles reality</p>
+    </div>
+
+    <div class="generator-layout">
+      <!-- Left: Prompt & Controls -->
+      <div class="generator-controls">
+        <div class="glass-panel prompt-panel float-panel">
+          <div class="panel-header">
+            <span class="panel-title">Design Prompt</span>
+            <button class="voice-btn" id="voiceBtn" title="Voice Input">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="23"/>
+                <line x1="8" y1="23" x2="16" y2="23"/>
+              </svg>
+            </button>
+          </div>
+          <textarea class="prompt-input" id="designPrompt" placeholder="Describe your architectural vision...
+
+e.g. 'A kinetic skyscraper with adaptive facade panels that respond to solar intensity, featuring vertical gardens on alternating floors, a sky bridge at level 40, and a zero-carbon energy system. Mixed-use with retail podium and residential tower.'"
+          ></textarea>
+          <div class="prompt-tags">
+            <span class="tag" data-prompt="Net-zero skyscraper">Net-zero Tower</span>
+            <span class="tag" data-prompt="Biophilic office campus">Biophilic Campus</span>
+            <span class="tag" data-prompt="Underground civic center">Underground Hub</span>
+            <span class="tag" data-prompt="Floating aquatic residence">Aquatic Residence</span>
+            <span class="tag" data-prompt="Parametric cultural museum">Cultural Museum</span>
+          </div>
+        </div>
+
+        <div class="glass-panel constraints-panel float-panel" style="--float-delay: 0.3s">
+          <div class="panel-header"><span class="panel-title">Design Constraints</span></div>
+          <div class="sliders-grid">
+            <div class="slider-group">
+              <div class="slider-header"><span>Budget</span><span class="slider-val" id="budgetVal">$45M</span></div>
+              <input type="range" class="custom-slider" id="budgetSlider" min="1" max="100" value="45" />
+            </div>
+            <div class="slider-group">
+              <div class="slider-header"><span>Sustainability</span><span class="slider-val" id="sustainVal">72%</span></div>
+              <input type="range" class="custom-slider" id="sustainSlider" min="1" max="100" value="72" />
+            </div>
+            <div class="slider-group">
+              <div class="slider-header"><span>Density</span><span class="slider-val" id="densityVal">FAR 4.5</span></div>
+              <input type="range" class="custom-slider" id="densitySlider" min="1" max="100" value="45" />
+            </div>
+            <div class="slider-group">
+              <div class="slider-header"><span>Height</span><span class="slider-val" id="heightVal">180m</span></div>
+              <input type="range" class="custom-slider" id="heightSlider" min="1" max="100" value="60" />
+            </div>
+            <div class="slider-group">
+              <div class="slider-header"><span>Green Space</span><span class="slider-val" id="greenVal">35%</span></div>
+              <input type="range" class="custom-slider" id="greenSlider" min="1" max="100" value="35" />
+            </div>
+            <div class="slider-group">
+              <div class="slider-header"><span>Complexity</span><span class="slider-val" id="complexVal">High</span></div>
+              <input type="range" class="custom-slider" id="complexSlider" min="1" max="100" value="80" />
+            </div>
+          </div>
+
+          <div class="style-chips">
+            <div class="chips-label">Architectural Style</div>
+            <div class="chips-row">
+              <button class="style-chip active" data-style="parametric">Parametric</button>
+              <button class="style-chip" data-style="brutalist">Neo-Brutalist</button>
+              <button class="style-chip" data-style="biophilic">Biophilic</button>
+              <button class="style-chip" data-style="decon">Deconstructivist</button>
+              <button class="style-chip" data-style="minimal">Minimalist</button>
+              <button class="style-chip" data-style="futuristic">Futurist</button>
+            </div>
+          </div>
+        </div>
+
+        <button class="generate-btn" id="generateBtn">
+          <div class="generate-btn-inner">
+            <span class="generate-icon">⚡</span>
+            <span class="generate-text">GENERATE DESIGN</span>
+            <div class="generate-pulse"></div>
+          </div>
+        </button>
+      </div>
+
+      <!-- Right: AI Status & Preview -->
+      <div class="generator-preview">
+        <div class="glass-panel ai-status-panel float-panel" style="--float-delay: 0.5s">
+          <div class="panel-header"><span class="panel-title">AI Processing Core</span></div>
+          <div class="ai-core-viz" id="aiCoreViz">
+            <canvas id="aiCoreCanvas"></canvas>
+            <div class="ai-core-rings">
+              <div class="ai-ring r1"></div>
+              <div class="ai-ring r2"></div>
+              <div class="ai-ring r3"></div>
+            </div>
+            <div class="ai-core-center">
+              <div class="ai-core-icon">🧠</div>
+              <div class="ai-status-text" id="aiStatusText">READY</div>
+            </div>
+          </div>
+          <div class="ai-metrics">
+            <div class="ai-metric">
+              <span class="ai-metric-label">Iterations</span>
+              <span class="ai-metric-val" id="iterVal">0</span>
+            </div>
+            <div class="ai-metric">
+              <span class="ai-metric-label">Confidence</span>
+              <span class="ai-metric-val" id="confVal">—</span>
+            </div>
+            <div class="ai-metric">
+              <span class="ai-metric-label">Variants</span>
+              <span class="ai-metric-val" id="varVal">0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-panel generation-log float-panel" style="--float-delay: 0.7s">
+          <div class="panel-header"><span class="panel-title">Generation Log</span><span class="log-live">◉ LIVE</span></div>
+          <div class="log-stream" id="logStream">
+            <div class="log-entry idle">▸ System initialized. Awaiting design prompt...</div>
+            <div class="log-entry idle">▸ Site data loaded: New York, Zone A-3</div>
+            <div class="log-entry idle">▸ Environmental parameters calibrated</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SECTION 3: ANTI-GRAVITY DESIGN VIEW
+  ═══════════════════════════════════════ -->
+  <section class="workspace-section" id="section-design">
+    <div class="section-header">
+      <div class="section-tag">MODULE 03</div>
+      <h2 class="section-title">Anti-Gravity <span class="title-accent">Design View</span></h2>
+      <p class="section-desc">Buildings assembled in zero-gravity architectural space</p>
+    </div>
+
+    <div class="design-layout">
+      <!-- Main 3D Viewport -->
+      <div class="glass-panel design-viewport float-panel">
+        <div class="viewport-toolbar">
+          <div class="toolbar-group">
+            <button class="tool-btn active" id="perspBtn" title="Perspective">⬜ Perspective</button>
+            <button class="tool-btn" id="frontBtn" title="Front View">▣ Front</button>
+            <button class="tool-btn" id="topBtn" title="Top View">◫ Top</button>
+            <button class="tool-btn" id="explodeBtn" title="Explode">💥 Explode</button>
+          </div>
+          <div class="toolbar-group">
+            <button class="tool-btn" id="wireBtn">◻ Wireframe</button>
+            <button class="tool-btn" id="solidBtn">◼ Solid</button>
+            <button class="tool-btn" id="xrayBtn">⬡ X-Ray</button>
+          </div>
+          <div class="toolbar-group">
+            <button class="tool-btn" id="assembleBtn">▶ Assemble</button>
+          </div>
+        </div>
+        <canvas id="designCanvas" class="design-canvas"></canvas>
+        <div class="viewport-overlay">
+          <div class="vp-info">ANTI-GRAVITY WORKSPACE v4.2</div>
+          <div class="vp-controls-hint">Drag to rotate · Scroll to zoom · Right-click to pan</div>
+        </div>
+      </div>
+
+      <!-- Right Sidebar: Variants + Components -->
+      <div class="design-sidebar">
+        <div class="glass-panel variants-panel float-panel" style="--float-delay: 0.3s">
+          <div class="panel-header"><span class="panel-title">Design Variants</span></div>
+          <div class="variants-grid">
+            <div class="variant-card active" id="var1">
+              <canvas class="variant-canvas" id="varCanvas1"></canvas>
+              <div class="variant-label">Variant A</div>
+              <div class="variant-score">Score: 91</div>
+            </div>
+            <div class="variant-card" id="var2">
+              <canvas class="variant-canvas" id="varCanvas2"></canvas>
+              <div class="variant-label">Variant B</div>
+              <div class="variant-score">Score: 87</div>
+            </div>
+            <div class="variant-card" id="var3">
+              <canvas class="variant-canvas" id="varCanvas3"></canvas>
+              <div class="variant-label">Variant C</div>
+              <div class="variant-score">Score: 84</div>
+            </div>
+            <div class="variant-card" id="var4">
+              <canvas class="variant-canvas" id="varCanvas4"></canvas>
+              <div class="variant-label">Variant D</div>
+              <div class="variant-score">Score: 79</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-panel components-panel float-panel" style="--float-delay: 0.6s">
+          <div class="panel-header"><span class="panel-title">Building Components</span></div>
+          <div class="components-list">
+            <div class="component-item active">
+              <div class="comp-icon" style="background:linear-gradient(135deg,#00f5ff33,#00f5ff11)">⬛</div>
+              <div class="comp-info"><span>Foundation</span><small>Depth: 12m · Pile: Bored</small></div>
+              <div class="comp-status ok">✓</div>
+            </div>
+            <div class="component-item">
+              <div class="comp-icon" style="background:linear-gradient(135deg,#bf00ff33,#bf00ff11)">⬡</div>
+              <div class="comp-info"><span>Core Structure</span><small>RC Frame · Grade C50</small></div>
+              <div class="comp-status ok">✓</div>
+            </div>
+            <div class="component-item">
+              <div class="comp-icon" style="background:linear-gradient(135deg,#ff006633,#ff006611)">▦</div>
+              <div class="comp-info"><span>Facade System</span><small>Kinetic ETFE · Smart Glass</small></div>
+              <div class="comp-status warn">⚠</div>
+            </div>
+            <div class="component-item">
+              <div class="comp-icon" style="background:linear-gradient(135deg,#00ff8833,#00ff8811)">◭</div>
+              <div class="comp-info"><span>Roof Garden</span><small>4,200m² · 40% Coverage</small></div>
+              <div class="comp-status ok">✓</div>
+            </div>
+            <div class="component-item">
+              <div class="comp-icon" style="background:linear-gradient(135deg,#ff8c0033,#ff8c0011)">◉</div>
+              <div class="comp-info"><span>MEP Systems</span><small>Geothermal + Solar PV</small></div>
+              <div class="comp-status ok">✓</div>
+            </div>
+            <div class="component-item">
+              <div class="comp-icon" style="background:linear-gradient(135deg,#00f5ff33,#bf00ff11)">⬟</div>
+              <div class="comp-info"><span>Sky Bridge</span><small>Level 40 · Span 42m</small></div>
+              <div class="comp-status">▸</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Scrubber -->
+        <div class="glass-panel timeline-panel float-panel" style="--float-delay: 0.9s">
+          <div class="panel-header"><span class="panel-title">Design Timeline</span></div>
+          <div class="timeline-scrubber">
+            <input type="range" id="timelineScrubber" min="0" max="100" value="100" class="timeline-slider"/>
+            <div class="timeline-labels">
+              <span>Concept</span><span>Schematic</span><span>Design Dev</span><span>Final</span>
+            </div>
+          </div>
+          <div class="timeline-phases">
+            <div class="phase active">Phase 1</div>
+            <div class="phase active">Phase 2</div>
+            <div class="phase active">Phase 3</div>
+            <div class="phase">Phase 4</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SECTION 4: SUSTAINABILITY DASHBOARD
+  ═══════════════════════════════════════ -->
+  <section class="workspace-section" id="section-sustain">
+    <div class="section-header">
+      <div class="section-tag">MODULE 04</div>
+      <h2 class="section-title">Sustainability <span class="title-accent">Dashboard</span></h2>
+      <p class="section-desc">Live environmental performance simulation and metrics</p>
+    </div>
+
+    <div class="sustain-layout">
+      <!-- Circular Metrics Row -->
+      <div class="metrics-row">
+        <div class="glass-panel metric-card float-panel">
+          <div class="metric-ring-wrap">
+            <svg viewBox="0 0 120 120" class="metric-svg">
+              <circle cx="60" cy="60" r="48" fill="none" stroke="rgba(0,245,255,0.1)" stroke-width="6"/>
+              <circle cx="60" cy="60" r="48" fill="none" stroke-width="6"
+                stroke="url(#energyGrad)" stroke-dasharray="301" stroke-dashoffset="60"
+                stroke-linecap="round" transform="rotate(-90 60 60)" class="metric-arc energy-arc"/>
+              <defs>
+                <linearGradient id="energyGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#00f5ff"/>
+                  <stop offset="100%" stop-color="#0066ff"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div class="metric-center">
+              <div class="metric-val">80<small>%</small></div>
+              <div class="metric-icon">⚡</div>
+            </div>
+          </div>
+          <div class="metric-label">Energy Efficiency</div>
+          <div class="metric-sublabel">Net-zero by 2028</div>
+        </div>
+
+        <div class="glass-panel metric-card float-panel" style="--float-delay: 0.2s">
+          <div class="metric-ring-wrap">
+            <svg viewBox="0 0 120 120" class="metric-svg">
+              <circle cx="60" cy="60" r="48" fill="none" stroke="rgba(0,255,136,0.1)" stroke-width="6"/>
+              <circle cx="60" cy="60" r="48" fill="none" stroke-width="6"
+                stroke="url(#waterGrad)" stroke-dasharray="301" stroke-dashoffset="75"
+                stroke-linecap="round" transform="rotate(-90 60 60)" class="metric-arc water-arc"/>
+              <defs>
+                <linearGradient id="waterGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#00ff88"/>
+                  <stop offset="100%" stop-color="#00ccff"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div class="metric-center">
+              <div class="metric-val">75<small>%</small></div>
+              <div class="metric-icon">💧</div>
+            </div>
+          </div>
+          <div class="metric-label">Water Recycling</div>
+          <div class="metric-sublabel">Greywater + Rainwater</div>
+        </div>
+
+        <div class="glass-panel metric-card float-panel" style="--float-delay: 0.4s">
+          <div class="metric-ring-wrap">
+            <svg viewBox="0 0 120 120" class="metric-svg">
+              <circle cx="60" cy="60" r="48" fill="none" stroke="rgba(191,0,255,0.1)" stroke-width="6"/>
+              <circle cx="60" cy="60" r="48" fill="none" stroke-width="6"
+                stroke="url(#carbonGrad)" stroke-dasharray="301" stroke-dashoffset="90"
+                stroke-linecap="round" transform="rotate(-90 60 60)" class="metric-arc carbon-arc"/>
+              <defs>
+                <linearGradient id="carbonGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#bf00ff"/>
+                  <stop offset="100%" stop-color="#ff006e"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div class="metric-center">
+              <div class="metric-val">70<small>%</small></div>
+              <div class="metric-icon">🌿</div>
+            </div>
+          </div>
+          <div class="metric-label">Carbon Reduction</div>
+          <div class="metric-sublabel">vs. Baseline 2020</div>
+        </div>
+
+        <div class="glass-panel metric-card float-panel" style="--float-delay: 0.6s">
+          <div class="metric-ring-wrap">
+            <svg viewBox="0 0 120 120" class="metric-svg">
+              <circle cx="60" cy="60" r="48" fill="none" stroke="rgba(255,140,0,0.1)" stroke-width="6"/>
+              <circle cx="60" cy="60" r="48" fill="none" stroke-width="6"
+                stroke="url(#biodivGrad)" stroke-dasharray="301" stroke-dashoffset="45"
+                stroke-linecap="round" transform="rotate(-90 60 60)" class="metric-arc biodiv-arc"/>
+              <defs>
+                <linearGradient id="biodivGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#ff8c00"/>
+                  <stop offset="100%" stop-color="#ffdd00"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div class="metric-center">
+              <div class="metric-val">85<small>%</small></div>
+              <div class="metric-icon">🦋</div>
+            </div>
+          </div>
+          <div class="metric-label">Biodiversity</div>
+          <div class="metric-sublabel">Habitat Score: A+</div>
+        </div>
+      </div>
+
+      <!-- Simulation Row -->
+      <div class="simulation-row">
+        <div class="glass-panel sim-panel float-panel">
+          <div class="panel-header">
+            <span class="panel-title">Daylight Simulation</span>
+            <div class="sim-controls">
+              <input type="range" id="sunAngle" min="0" max="100" value="50" class="mini-slider"/>
+              <span class="sim-label" id="sunLabel">12:00 PM</span>
+            </div>
+          </div>
+          <canvas id="daylightCanvas" class="sim-canvas"></canvas>
+        </div>
+
+        <div class="glass-panel sim-panel float-panel" style="--float-delay: 0.3s">
+          <div class="panel-header">
+            <span class="panel-title">Airflow Analysis</span>
+            <div class="sim-label">Wind Speed: 4.2 m/s</div>
+          </div>
+          <canvas id="airflowCanvas" class="sim-canvas"></canvas>
+        </div>
+      </div>
+
+      <!-- Green Score -->
+      <div class="glass-panel green-score-panel float-panel" style="--float-delay: 0.5s">
+        <div class="panel-header"><span class="panel-title">LEED / Green Score</span></div>
+        <div class="green-categories">
+          <div class="green-cat">
+            <span class="gc-name">Sustainable Sites</span>
+            <div class="gc-bar"><div class="gc-fill" style="--w:90%">90</div></div>
+          </div>
+          <div class="green-cat">
+            <span class="gc-name">Water Efficiency</span>
+            <div class="gc-bar"><div class="gc-fill" style="--w:72%">72</div></div>
+          </div>
+          <div class="green-cat">
+            <span class="gc-name">Energy & Atmosphere</span>
+            <div class="gc-bar"><div class="gc-fill" style="--w:85%">85</div></div>
+          </div>
+          <div class="green-cat">
+            <span class="gc-name">Materials & Resources</span>
+            <div class="gc-bar"><div class="gc-fill" style="--w:78%">78</div></div>
+          </div>
+          <div class="green-cat">
+            <span class="gc-name">Indoor Quality</span>
+            <div class="gc-bar"><div class="gc-fill" style="--w:92%">92</div></div>
+          </div>
+          <div class="green-cat">
+            <span class="gc-name">Innovation</span>
+            <div class="gc-bar"><div class="gc-fill" style="--w:95%">95</div></div>
+          </div>
+        </div>
+        <div class="leed-badge">
+          <div class="badge-glow">LEED PLATINUM</div>
+          <div class="badge-score">Overall: 87 / 110</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SECTION 5: COST & STRUCTURAL INSIGHTS
+  ═══════════════════════════════════════ -->
+  <section class="workspace-section" id="section-insights">
+    <div class="section-header">
+      <div class="section-tag">MODULE 05</div>
+      <h2 class="section-title">Cost & Structural <span class="title-accent">Insights</span></h2>
+      <p class="section-desc">Real-time cost analysis and structural force visualization</p>
+    </div>
+
+    <div class="insights-layout">
+      <!-- Cost Counter -->
+      <div class="glass-panel cost-panel float-panel">
+        <div class="panel-header"><span class="panel-title">Live Cost Estimator</span><span class="live-badge">◉ LIVE</span></div>
+        <div class="cost-total">
+          <div class="cost-label">Total Project Cost</div>
+          <div class="cost-value" id="costCounter">$0</div>
+          <div class="cost-currency">USD · 2026 ESTIMATE</div>
+        </div>
+        <div class="cost-breakdown-list">
+          <div class="cost-item">
+            <span class="ci-name">🏗 Structure & Foundation</span>
+            <div class="ci-bar"><div class="ci-fill" style="--w:40%; --color:#00f5ff"></div></div>
+            <span class="ci-val">$18.2M</span>
+          </div>
+          <div class="cost-item">
+            <span class="ci-name">🪟 Facade & Glazing</span>
+            <div class="ci-bar"><div class="ci-fill" style="--w:22%; --color:#bf00ff"></div></div>
+            <span class="ci-val">$9.8M</span>
+          </div>
+          <div class="cost-item">
+            <span class="ci-name">🔌 MEP Systems</span>
+            <div class="ci-bar"><div class="ci-fill" style="--w:18%; --color:#00ff88"></div></div>
+            <span class="ci-val">$8.1M</span>
+          </div>
+          <div class="cost-item">
+            <span class="ci-name">🌱 Landscaping</span>
+            <div class="ci-bar"><div class="ci-fill" style="--w:8%; --color:#ffdd00"></div></div>
+            <span class="ci-val">$3.6M</span>
+          </div>
+          <div class="cost-item">
+            <span class="ci-name">🏛 Interiors</span>
+            <div class="ci-bar"><div class="ci-fill" style="--w:12%; --color:#ff8c00"></div></div>
+            <span class="ci-val">$5.3M</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Structural Stress -->
+      <div class="glass-panel stress-panel float-panel" style="--float-delay: 0.3s">
+        <div class="panel-header"><span class="panel-title">Structural Stress Analysis</span></div>
+        <canvas id="stressCanvas" class="stress-canvas"></canvas>
+        <div class="stress-legend">
+          <div class="sl-item"><div class="sl-dot" style="background:#00ff88"></div><span>Safe</span></div>
+          <div class="sl-item"><div class="sl-dot" style="background:#ffdd00"></div><span>Moderate</span></div>
+          <div class="sl-item"><div class="sl-dot" style="background:#ff6600"></div><span>Critical</span></div>
+        </div>
+      </div>
+
+      <!-- Materials -->
+      <div class="glass-panel materials-panel float-panel" style="--float-delay: 0.6s">
+        <div class="panel-header"><span class="panel-title">Material Suggestions</span></div>
+        <div class="materials-grid">
+          <div class="material-card" style="--delay: 0s">
+            <div class="mat-swatch" style="background: linear-gradient(135deg, #c0c0c0, #808080)"></div>
+            <div class="mat-info">
+              <div class="mat-name">High-Strength Steel</div>
+              <div class="mat-spec">Grade S460 · Recycled 65%</div>
+              <div class="mat-score"><span style="color:#00f5ff">★★★★★</span></div>
+            </div>
+          </div>
+          <div class="material-card" style="--delay: 0.1s">
+            <div class="mat-swatch" style="background: linear-gradient(135deg, #b8d4e8, #7fb3d6)"></div>
+            <div class="mat-info">
+              <div class="mat-name">Smart Electrochromic Glass</div>
+              <div class="mat-spec">U-value 0.8 · BIPV Ready</div>
+              <div class="mat-score"><span style="color:#00f5ff">★★★★</span><span style="color:#333">★</span></div>
+            </div>
+          </div>
+          <div class="material-card" style="--delay: 0.2s">
+            <div class="mat-swatch" style="background: linear-gradient(135deg, #f5f0e0, #d4c9a0)"></div>
+            <div class="mat-info">
+              <div class="mat-name">Mass Timber (CLT)</div>
+              <div class="mat-spec">Carbon Sequester: +42 tCO₂</div>
+              <div class="mat-score"><span style="color:#00ff88">★★★★★</span></div>
+            </div>
+          </div>
+          <div class="material-card" style="--delay: 0.3s">
+            <div class="mat-swatch" style="background: linear-gradient(135deg, #2a2a2a, #4a4a4a)"></div>
+            <div class="mat-info">
+              <div class="mat-name">Graphene Concrete</div>
+              <div class="mat-spec">2× Strength · 30% lighter</div>
+              <div class="mat-score"><span style="color:#bf00ff">★★★★★</span></div>
+            </div>
+          </div>
+          <div class="material-card" style="--delay: 0.4s">
+            <div class="mat-swatch" style="background: linear-gradient(135deg, #ff8080, #cc4444)"></div>
+            <div class="mat-info">
+              <div class="mat-name">Aerogel Insulation</div>
+              <div class="mat-spec">R-30 per inch · Fire Class A</div>
+              <div class="mat-score"><span style="color:#00f5ff">★★★★</span><span style="color:#333">★</span></div>
+            </div>
+          </div>
+          <div class="material-card" style="--delay: 0.5s">
+            <div class="mat-swatch" style="background: linear-gradient(135deg, #40e0d0, #00bcd4)"></div>
+            <div class="mat-info">
+              <div class="mat-name">ETFE Membrane</div>
+              <div class="mat-spec">UV Transparent · Self-Cleaning</div>
+              <div class="mat-score"><span style="color:#00ff88">★★★★★</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══════════════════════════════════════════════════
+     SPLIT COMPARE MODAL
+════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="compareModal">
+  <div class="modal-glass">
+    <button class="modal-close" id="closeCompare">✕</button>
+    <div class="modal-header">Split Screen Comparison</div>
+    <div class="compare-viewport">
+      <div class="compare-half left-half">
+        <canvas id="compareCanvasA"></canvas>
+        <div class="compare-label">Variant A — Score: 91</div>
+      </div>
+      <div class="compare-divider"></div>
+      <div class="compare-half right-half">
+        <canvas id="compareCanvasB"></canvas>
+        <div class="compare-label">Variant B — Score: 87</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     AR MODE OVERLAY
+════════════════════════════════════════════════════ -->
+<div class="ar-overlay" id="arOverlay">
+  <div class="ar-frame">
+    <div class="ar-corner tl"></div>
+    <div class="ar-corner tr"></div>
+    <div class="ar-corner bl"></div>
+    <div class="ar-corner br"></div>
+    <div class="ar-content">
+      <div class="ar-icon">⬡</div>
+      <div class="ar-title">AR/VR MODE</div>
+      <div class="ar-desc">Connect a headset or enable camera for immersive walkthrough</div>
+      <button class="ar-close-btn" id="arClose">EXIT AR MODE</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     COMPARE BUTTON (floating)
+════════════════════════════════════════════════════ -->
+<button class="floating-compare-btn" id="compareBtn" title="Split-Screen Compare">
+  ⊞ COMPARE
+</button>
+
+<!-- SCRIPTS -->
+<script src="app.js"></script>
+</body>
+</html>
